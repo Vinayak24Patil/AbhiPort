@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>About — Vinayak Patil</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1 class="name">Vinayak Patil</h1>
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="about.html" class="active">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container content">
+    <h2>About me</h2>
+    <p>I build web interfaces and enjoy making things simple, accessible, and fast. I work with HTML, CSS, and JavaScript and use CI/CD for deployment.</p>
+
+    <h3>Skills</h3>
+    <ul>
+      <li>HTML & CSS (responsive design, accessibility)</li>
+      <li>JavaScript (vanilla + frameworks)</li>
+      <li>Build & Deploy (Git, GitHub, Jenkins)</li>
+    </ul>
+
+    <h3>Contact</h3>
+    <p>Email: <a href="mailto:vinayak@example.com">vinayak@example.com</a></p>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© <span id="year2"></span> Vinayak Patil</p>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year2').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

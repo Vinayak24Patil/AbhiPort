@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Vinayak Patil — Portfolio</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1 class="name">Vinayak Patil</h1>
+      <nav class="nav">
+        <a href="index.html" class="active">Home</a>
+        <a href="about.html">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container hero">
+    <section class="intro">
+      <h2>Hi — I'm Vinayak</h2>
+      <p>Frontend developer with a focus on clean UI, accessible web pages, and simple performant code.</p>
+      <p class="cta"><a href="about.html">Learn more →</a></p>
+    </section>
+
+    <section class="projects">
+      <h3>Selected Projects</h3>
+      <ul>
+        <li><strong>Project Alpha</strong> — A responsive web app demonstrating modern CSS patterns.</li>
+        <li><strong>Project Beta</strong> — A small static site deployed with CI/CD.</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© <span id="year"></span> Vinayak Patil — <a href="https://github.com/Vinayak24Patil" target="_blank" rel="noopener">GitHub</a></p>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
