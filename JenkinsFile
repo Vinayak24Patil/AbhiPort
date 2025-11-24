@@ -1,0 +1,36 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+
+        stage('Build') {
+            steps {
+                echo 'No build step needed – static HTML/CSS site.'
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                // 🔁 Change this path to where you want to host the site
+                bat '''
+                if not exist "D:\\Deploy\\AbhiPort" mkdir "D:\\Deploy\\AbhiPort"
+                xcopy /Y /E /I "%WORKSPACE%\\*" "D:\\Deploy\\AbhiPort\\"
+                '''
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Portfolio Deployment Successful!'
+        }
+        failure {
+            echo 'Deployment Failed!'
+        }
+    }
+}
