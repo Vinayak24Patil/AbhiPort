@@ -44,7 +44,7 @@ pipeline {
             steps {
                 bat """
                     docker rm -f web-container || echo Container not running
-                    docker run -d --name web-container -p 7070:80 %IMAGE_NAME%:%IMAGE_TAG%
+                    docker run -d --name web-container -p 8081:80 %IMAGE_NAME%:%IMAGE_TAG%
                 """
             }
         }
