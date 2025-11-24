@@ -1,28 +1,58 @@
 pipeline {
     agent any
 
+    environment {
+        IMAGE_NAME = "vinayakpatil24/abhiport"
+        IMAGE_TAG = "latest"
+    }
+
     stages {
-        stage('Checkout') {
+        stage('Checkout Code') {
             steps {
-                checkout scm
+                git branch: 'main', url: 'https://github.com/Vinayak24Patil/AbhiPort.git'
             }
         }
 
-        stage('Validate (optional)') {
+        stage('Build Docker Image') {
             steps {
-                echo 'Validation step – not implemented yet.'
+                bat """
+                    docker build -t %IMAGE_NAME%:%IMAGE_TAG% .
+                """
             }
         }
 
-        stage('Deploy to gh-pages') {
+        stage('Login to Docker Hub') {
             steps {
-                echo 'Deploy logic here'
+                withCredentials([usernamePassword(credentialsId: 'docker-hub-creds', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+                    bat """
+                        docker logout
+                        echo %DOCKER_PASS% | docker login -u %DOCKER_USER% --password-stdin
+                    """
+                }
+            }
+        }
+
+        stage('Push Image to Docker Hub') {
+            steps {
+                bat """
+                    docker push %IMAGE_NAME%:%IMAGE_TAG%
+                """
+            }
+        }
+
+        stage('Deploy Container') {
+            steps {
+                bat """
+                    docker rm -f web-container || echo Container not running
+                    docker run -d --name web-container -p 7070:80 %IMAGE_NAME%:%IMAGE_TAG%
+                """
             }
         }
     }
 
     post {
-        failure { echo 'Deploy failed' }
-        success { echo 'Deploy successful' }
+        always {
+            echo "Pipeline finished. Visit http://localhost:7070"
+        }
     }
-}
+} 
