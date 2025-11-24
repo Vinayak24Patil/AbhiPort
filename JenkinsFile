@@ -8,29 +8,21 @@ pipeline {
             }
         }
 
-        stage('Build') {
+        stage('Validate (optional)') {
             steps {
-                echo 'No build step needed – static HTML/CSS site.'
+                echo 'Validation step – not implemented yet.'
             }
         }
 
-        stage('Deploy') {
+        stage('Deploy to gh-pages') {
             steps {
-                // 🔁 Change this path to where you want to host the site
-                bat '''
-                if not exist "D:\\Deploy\\AbhiPort" mkdir "D:\\Deploy\\AbhiPort"
-                xcopy /Y /E /I "%WORKSPACE%\\*" "D:\\Deploy\\AbhiPort\\"
-                '''
+                echo 'Deploy logic here'
             }
         }
     }
 
     post {
-        success {
-            echo 'Portfolio Deployment Successful!'
-        }
-        failure {
-            echo 'Deployment Failed!'
-        }
+        failure { echo 'Deploy failed' }
+        success { echo 'Deploy successful' }
     }
 }
